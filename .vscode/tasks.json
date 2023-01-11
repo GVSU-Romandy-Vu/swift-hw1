@@ -1,0 +1,46 @@
+{  
+ 	"version": "2.0.0",
+ 	"tasks": [
+ 		{
+ 			"label": "Swift compile",
+ 			"type": "process",
+ 			"command": "swiftc",
+ 			"args": [
+ 				"${fileBasename}"
+ 			],
+ 			"windows": {
+ 				"command": "swiftc",
+ 				"args": [
+ 					"${fileBasename}"
+ 				]
+ 			},
+ 			"presentation": {
+ 				"panel": "shared",
+ 				"showReuseMessage": false,
+ 				"clear": true
+ 			},
+ 		},
+ 		{
+ 			"label": "Swift execute",
+ 			"type": "process",
+ 			"command": "${fileBasenameNoExtension}",
+ 			"windows": {
+ 				"command": "${fileBasenameNoExtension}"
+ 			},
+ 			"presentation": {
+ 				"panel": "shared",
+ 				"showReuseMessage": false,
+ 				"clear": false
+ 			},
+  		},
+ 		{
+ 			"label": "Swift run",
+ 			"dependsOrder": "sequence",
+ 			"dependsOn": ["Swift compile", "Swift execute"],
+  			"group": {
+ 				"kind": "build",
+ 				"isDefault": true
+ 			},
+ 		}
+ 	]
+}
