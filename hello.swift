@@ -208,3 +208,132 @@ written in problem #14. [Note: this could take a while to run! After you’ve co
 yourself your code works, maybe dial up the step to 10k or more so it doesn’t freeze your
 playground!]*/
 //for i in stride(from: 1, to: 100_000_000, by: 10){print(verbalizeNumber(count: i))} 
+
+/*Problem 16 (2 pts): Write another Swift function named verbalizeAndShoutNumber
+that is identical to the one you wrote in problem 14, only all letters in the expression
+returned are capitalized. Note, if you research how you can capitalize a string in Swift,
+you should be able implement this function in a single line of code!*/
+func verbalizeAndShoutNumber(count: Int) -> String{return verbalizeNumber(count).uppercased()}
+
+/*Problem 17 (2 pts): Wrap the functionality you wrote in Problem 15 as a function named
+expressNumbersElegantly that takes two parameters – an Int value, and a function that
+takes an Int and returns a String. The implementation of this function should do exactly
+what you did in 15 only:
+● iterate up to the integer value passed in.
+● call the function passed as a parameter instead of hardwiring the call to
+verbalizeNumber.
+● instead of printing out text, you should concatenate it into a single string and
+return it to the caller.
+● Define a variable of type function that takes an Int value and returns a String. Set
+the variable to each of the two functions (verbalizeNumber and
+verbalizeAndShoutNumber) and call expressNumbersElegantly each time you set
+it.*/
+func expressNumbersElegantly(intParameter:Int, function:(Int) -> String) -> String
+{
+    var concatenated_string: String = ""
+    for i in 0 ... intParameter{ concatenated_string += function(i) + " "}
+
+    return concatenated_string
+}
+
+var verbalizeNumberVariable: (Int) -> String = verbalizeNumber
+expressNumbersElegantly(intParameter:10, verbalizeNumberVariable)
+
+var verbalizeAndShoutNumberVariable: (Int) -> String = verbalizeAndShoutNumber
+expressNumbersElegantly(intParameter:1000, verbalizeAndShoutNumberVariable)
+
+/*Problem 18 (2 pts). a) Implement a class named Widget that implements the following
+protocol:
+protocol Thing {
+func summarize() -> String
+}
+In addition the Widget class should define a String property called name, and an Int
+property called cost. An initializer should be provided to create instances of Widget
+passing in values for these two properties. The summarize() method should be
+implemented to produce a string as described in the comments in the sample code shown
+below.*/
+protocol Thing{func summarize() -> String}
+
+class Widget: Thing
+{
+    var name: String
+    var cost: Int
+
+    init(name: String, cost: Int)
+    {
+        self.name = name
+        self.cost = cost
+    }
+    func summarize() -> String {return "I am a \(self.name). I cost \(self.cost)"}
+}
+
+/*b) After implementing Widget, introduce a new derived class ShinyWidget that
+inherits Widget. ShinyWidget must override the summarize() method to produce
+the slightly different string as shown in the comments in the sample code below.
+Note: If the two classes are implemented correctly, the following code should produce the
+strings described in the comments:
+let w1 = Widget(name: "CoolWidget",cost: 10)
+let w2 = ShinyWidget(name: "CoolerWidget", cost: 100)
+print(w1.summarize()) // prints "I am a CoolWidget. I cost 10 dollars."
+print(w2.summarize()) // prints "I am a SHINY CoolerWidget. I cost 100 dollars."*/
+class ShinyWidget: Widget
+{
+    override func summarize() -> String
+    {
+        return "I am a SHINY \(self.name). I cost \(self.cost)"
+    }
+}
+
+
+/*Problem 19 (2 pts): Given the following Swift array:
+var famousLastWords = ["the cow jumped over the moon.", "three score and four years ago", "lets
+nuc 'em Joe!", "ah, there is just something about Swift"]
+use the map function Array class to capitalize the first letter of each entry in the array.
+Code up the capitalization code as a closure that is passed to the map function.*/
+
+var famousLastWords = ["the cow jumped over the moon.", "three score and four years ago", "lets
+nuc 'em Joe!", "ah, there is just something about Swift"]
+
+famousLastWords.map({word in
+{
+
+}
+
+})
+
+/*Problem 20 (3 pts): Implement an extension to the String type that adds two methods:
+● encrypt() - returns an encoded version of the string where each character is
+determined by the Unicode value of the original character + 1.
+
+● decrypt() - returns an encoded version of the string where each character is
+determined by the Unicode code of the original character - 1.
+
+For example, if implemented correctly this code should behave as the comments indicate:
+let str: String = "Hello World Secrets!"
+
+let encodedStr = str.encrypt() // produces "Ifmmp!Xpsme!Tfdsfut"
+
+print(encodedStr.decrypt()) // produces "Hello World Secrets!"
+
+Hints: There are a number of ways you could implement this extension, but here are some
+helpful hints that may suggest a path to a viable solution:
+
+● String has a property unicodeScalars of type UnicodeScalarsView which is the
+string’s value represented as a collection of scalar values.
+
+● The map method could be used to iterate through a UnicodeScalarsView to
+produce an array of encoded strings that could then be joined into a single string
+using the join method on the string array.
+
+● The map method will work fine, but an even more elegant approach would be to
+use the reduce method on the UnicodeScalarsView!
+
+● Whether you use map or reduce in your implementation, an Unicode value val
+can be converted into a single character String as follows:
+String(UnicodeScalar(UInt8(val)))*/
+extension String
+{
+    func encrypt(){}
+
+    func decrypt(){}
+}
